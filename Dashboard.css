@@ -1,0 +1,38 @@
+#dashboard {
+    padding: 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Space between image and chart */
+}
+
+.rotating-image {
+    width: 100px; /* Set a width for the image */
+    height: auto; /* Maintain aspect ratio */
+    animation: rotation 10s infinite linear; /* Rotate the image */
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#stockOverview {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: auto; /* Adjust height to fit contents */
+}
+
+.canvas-container {
+    max-width: 900px; /* Increase max-width for the chart */
+    width: 100%; /* Ensure it takes full container width */
+    height: 500px; /* Increased height for better visibility */
+    margin: 0 auto; /* Center the chart */
+}
