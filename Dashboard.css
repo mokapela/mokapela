@@ -1,38 +1,77 @@
+/* Dashboard Styles */
 #dashboard {
     padding: 20px;
+    background-color: #f8f9fa; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+#stockOverview {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    padding: 20px; /* Padding around stock overview */
+    background-color: #ffffff; /* White background for stock overview */
+    border-radius: 8px; /* Rounded corners for stock overview */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for stock overview */
+    margin-bottom: 20px; /* Space below the stock overview */
+}
+
+.canvas-container {
+    max-width: 900px; /* Keep max-width for the chart */
+    width: 100%; /* Ensure it takes full container width */
+    height: 500px; /* Chart height for visibility */
+    margin: 0 auto; /* Center the chart */
 }
 
 .image-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Allow images to wrap if there's not enough space */
     margin-bottom: 20px; /* Space between image and chart */
+    gap: 15px; /* Add gap between images */
 }
 
+/* Styles for each rotating image */
 .rotating-image {
-    width: 100px; /* Set a width for the image */
-    height: auto; /* Maintain aspect ratio */
-    animation: rotation 10s infinite linear; /* Rotate the image */
+    width: 120px; /* Adjust width of images */
+    height: 120px; /* Set height */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 50%; /* Circular shape */
+    border: 3px solid #007bff; /* Blue border */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: transform 0.3s; /* Smooth scaling on hover */
 }
 
-@keyframes rotation {
-    0% {
+/* Scale up on hover for a nice effect */
+.rotating-image:hover {
+    transform: scale(1.1);
+}
+
+/* Rotating animation for images */
+.rotating-image img {
+    width: 100%;
+    height: auto;
+    animation: rotate 10s linear infinite; /* Adjust rotation duration */
+}
+
+@keyframes rotate {
+    from {
         transform: rotate(0deg);
     }
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
 
-#stockOverview {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: auto; /* Adjust height to fit contents */
-}
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 600px) {
+    .rotating-image {
+        width: 80px; /* Smaller width on mobile */
+        height: 80px; /* Smaller height on mobile */
+    }
 
-.canvas-container {
-    max-width: 900px; /* Increase max-width for the chart */
-    width: 100%; /* Ensure it takes full container width */
-    height: 500px; /* Increased height for better visibility */
-    margin: 0 auto; /* Center the chart */
+    .canvas-container {
+        height: 300px; /* Smaller height for mobile chart */
+    }
 }

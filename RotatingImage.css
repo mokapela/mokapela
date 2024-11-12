@@ -1,0 +1,38 @@
+/* RotatingImage.css */
+.rotating-image {
+    width: 120px; /* Width of the circular area */
+    height: 120px; /* Height of the circular area */
+    overflow: hidden; /* Hide overflow to keep the circle */
+    border-radius: 50%; /* Makes it circular */
+    border: 3px solid #007bff; /* Blue border */
+    position: relative; /* Position relative for absolute children */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    animation: rotation 10s infinite linear; /* Animation for rotation */
+}
+
+/* Ensure the image fills the circle */
+.rotating-image img {
+    width: 100%; /* Fill entire width */
+    height: 100%; /* Fill entire height */
+    object-fit: cover; /* Cover the circular area without distortion */
+    position: absolute; /* Positioning to maintain centering */
+    top: 0; /* Align to top */
+    left: 0; /* Align to left */
+    transition: transform 0.3s; /* Smooth scaling on hover */
+}
+
+/* Optional: Scale up the image on hover for a nice effect */
+.rotating-image:hover img {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Style for the canvas */
+.rotating-image canvas {
+    position: absolute; /* Position canvas absolutely */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the canvas */
+    width: 90%; /* Adjust size to fit inside the container */
+    height: 90%; /* Maintain graph size */
+}
+

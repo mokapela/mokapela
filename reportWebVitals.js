@@ -1,13 +1,14 @@
-const reportWebVitals = onPerfEntry => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
+// RotatingImage.js
+import React from 'react';
+import './RotatingImage.css'; // Add necessary styles
+
+const RotatingImage = ({ src, alt, quantity }) => {
+    return (
+        <div className="image-wrapper">
+            <img src={src} alt={alt} className="rotating-image" />
+            {quantity && <div className="quantity-overlay">{quantity}</div>}
+        </div>
+    );
 };
 
-export default reportWebVitals;
+export default RotatingImage;

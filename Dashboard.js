@@ -1,44 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, Title, Tooltip, Legend, PointElement } from 'chart.js'; 
 import './Dashboard.css';
+import RotatingImage from './RotatingImage'; 
+import foodImage1 from './food.jpg'; // import your first image
+import foodImage2 from './food2.jpg'; // import your second image
+import foodImage3 from './food3.jpg'; // import your third image
+import foodImage4 from './food4.jpg'; // import your fourth image
+import foodImage5 from './food5.jpg'; // import your fifth image
 
 // Register necessary components for Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, Title, Tooltip, Legend, PointElement);
 
 function Dashboard() {
     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Define loading state
-    const [error, setError] = useState(null); // Define error state
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
-            setIsLoading(true); // Start loading
+            setIsLoading(true);
             try {
                 const response = await fetch('http://localhost:5300/products');
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data); // Log to verify the data structure
                     setProducts(data);
-                    setError(null); // Clear error if successful
+                    setError(null);
                 } else {
                     setError('Failed to fetch products');
                 }
             } catch (error) {
                 setError('Error fetching products: ' + error.message);
             } finally {
-                setIsLoading(false); // End loading
+                setIsLoading(false);
             }
         };
 
         fetchProducts();
-
-        // Cleanup effect on unmount
-        return () => {
-            setProducts([]);
-            setError(null);
-            setIsLoading(false);
-        };
     }, []);
 
     const chartData = {
@@ -65,36 +63,12 @@ function Dashboard() {
     };
 
     const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Product Stock Levels and Price',
-            },
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Quantity',
-                },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)',
-                },
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Products',
-                },
-            },
-        },
+        responsive: true, 
+        maintainAspectRatio: false 
     };
+
+    // Array of images to display
+    const foodImages = [foodImage1, foodImage2, foodImage3, foodImage4, foodImage5];
 
     return (
         <section id="dashboard">
@@ -110,6 +84,12 @@ function Dashboard() {
                 ) : (
                     <div>No products available</div>
                 )}
+                {/* Render images */}
+                <div className="image-container">
+                    {foodImages.map((src, index) => (
+                        <RotatingImage key={index} src={src} alt={`Delicious Food ${index + 1}`} />
+                    ))}
+                </div>
             </div>
         </section>
     );

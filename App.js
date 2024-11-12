@@ -4,7 +4,6 @@ import ProductManagement from './ProductManagement';
 import UsersManagement from './UsersManagement';
 import Dashboard from './Dashboard';
 import Login from './Login';
-import Logout from './Logout'; // Import the Logout component
 
 function App() {
     const [activeSection, setActiveSection] = useState('dashboard');
@@ -17,8 +16,6 @@ function App() {
         if (storedProducts) {
             setProducts(JSON.parse(storedProducts));
         }
-        const loginStatus = localStorage.getItem('isLoggedIn');
-        setIsLoggedIn(loginStatus === 'true');
     }, []);
 
     // Update localStorage whenever products state changes
@@ -56,12 +53,6 @@ function App() {
         localStorage.setItem('isLoggedIn', 'true');
     };
 
-    // Handle logout
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        localStorage.setItem('isLoggedIn', 'false');
-    };
-
     return (
         <div>
             <header>
@@ -91,7 +82,9 @@ function App() {
                         >
                             Users Management
                         </button>
-                        <button onClick={handleLogout}>Logout</button> {/* Logout button */}
+                        <button onClick={() => { setIsLoggedIn(false); localStorage.setItem('isLoggedIn', 'false'); }}>
+                            Logout
+                        </button>
                     </nav>
                     <main>
                         {activeSection === 'dashboard' && <Dashboard products={products} />}
